@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Rupa Beauty Parlour</title>
+
+  <style>
+   /* COLORFUL FAIRY LIGHTS */
+
+.fairy-light {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  opacity: 0;
+  z-index: 5;
+  border-radius: 50%;
+  transition: opacity 0.5s ease;
+}
+
+.fairy-light.on {
+  opacity: 1;
+  animation: fairyGlow 1.8s infinite ease-in-out;
+}
+
+.fairy-red {
+  background: radial-gradient(
+    circle,
+    rgba(255, 220, 220, 1) 0%,
+    rgba(255, 70, 70, 0.8) 5%,
+    rgba(255, 0, 0, 0.5) 15%,
+    rgba(255, 0, 0, 0.18) 35%,
+    transparent 75%
+  );
+}
+
+.fairy-green {
+  background: radial-gradient(
+    circle,
+    rgba(220, 255, 220, 1) 0%,
+    rgba(50, 255, 80, 0.8) 5%,
+    rgba(0, 220, 50, 0.5) 15%,
+    rgba(0, 220, 50, 0.18) 35%,
+    transparent 75%
+  );
+}
+
+.fairy-blue {
+  background: radial-gradient(
+    circle,
+    rgba(220, 235, 255, 1) 0%,
+    rgba(50, 130, 255, 0.8) 5%,
+    rgba(0, 80, 255, 0.5) 15%,
+    rgba(0, 80, 255, 0.18) 35%,
+    transparent 75%
+  );
+}
+
+.fairy-orange {
+  background: radial-gradient(
+    circle,
+    rgba(255, 240, 210, 1) 0%,
+    rgba(255, 150, 40, 0.8) 5%,
+    rgba(255, 100, 0, 0.5) 15%,
+    rgba(255, 100, 0, 0.18) 35%,
+    transparent 75%
+  );
+}
+
+@keyframes fairyGlow {
+  0%, 100% {
+    transform: translate(-50%, -50%) scale(0.85);
+    opacity: 0.65;
+  }
+
+  50% {
+    transform: translate(-50%, -50%) scale(1.15);
+    opacity: 1;
+  }
+}
+
+* {
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: #16090b;
+      color: white;
+      font-family: Georgia, serif;
+      text-align: center;
+    }
+
+    .title {
+      padding: 18px 10px 12px;
+      background: #241013;
+    }
+
+    .title h1 {
+      margin: 0;
+      font-size: 27px;
+      letter-spacing: 2px;
+      color: #f5d58a;
+    }
+
+    .title p {
+      margin: 5px 0 0;
+      font-size: 13px;
+      color: #d8b8a0;
+    }
+
+    /* PARLOUR IMAGE */
+
+    .room {
+      position: relative;
+      width: 100%;
+      max-width: 900px;
+      margin: auto;
+      overflow: hidden;
+    }
+
+    .room-image {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    /* INVISIBLE RADIO HOTSPOT */
+
+    .radio-hotspot {
+      position: absolute;
+
+      left: 43%;
+      top: 48%;
+
+      width: 12%;
+      height: 12%;
+
+      transform: translate(-50%, -50%);
+
+      border: none;
+      background: transparent;
+
+      padding: 0;
+      cursor: pointer;
+
+      z-index: 10;
+    }
+
+    /* RADIO LIGHTS */
+
+    .radio-light {
+      position: absolute;
+
+      width: 18px;
+      height: 18px;
+
+      transform: translate(-50%, -50%);
+
+      pointer-events: none;
+
+      opacity: 0;
+
+      background:
+        radial-gradient(
+          circle,
+          rgba(245, 255, 220, 0.95) 0%,
+          rgba(190, 255, 170, 0.75) 1%,
+          rgba(100, 255, 120, 0.50) 5%,
+          rgba(70, 255, 100, 0.25) 10%,
+          rgba(70, 255, 100, 0.10) 20%,
+          rgba(70, 255, 100, 0.10) 40%,
+          transparent 85%
+        );
+
+      filter: blur(0.4px);
+
+      transition:
+        opacity 0.5s ease,
+        transform 0.5s ease;
+
+      z-index: 8;
+    }
+
+    .radio-light.one {
+      left: 45%;
+      top: 50%;
+    }
+
+    .radio-light.two {
+      left: 46%;
+      top: 50%;
+    }
+
+    .radio-light.three {
+      left: 47%;
+      top: 50%;
+    }
+
+    .radio-light.on {
+      opacity: 1;
+    }
+
+    /* MUSIC AREA */
+
+    .music-area {
+      display: none;
+
+      width: 92%;
+      max-width: 380px;
+
+      margin: 20px auto 30px;
+
+      position: relative;
+    }
+
+    .music-area.show {
+      display: block;
+    }
+
+    .music-title {
+      margin-bottom: 10px;
+
+      font-size: 17px;
+      color: #f5d58a;
+      letter-spacing: 1px;
+    }
+
+    .player-box {
+      position: relative;
+
+      width: 100%;
+      aspect-ratio: 16 / 9;
+
+      background: #000;
+
+      border: 2px solid #76503d;
+      border-radius: 6px;
+
+      overflow: hidden;
+    }
+
+    #youtubePlayer {
+      width: 100%;
+      height: 100%;
+
+      border: 0;
+    }
+
+    /* PRICE CARD */
+
+    .price-cover {
+      position: absolute;
+
+      inset: 0;
+
+      background: #16090b;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      opacity: 0;
+      pointer-events: none;
+
+      transition: opacity 0.6s ease;
+
+      z-index: 5;
+    }
+
+    .price-cover.show {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .price-cover img {
+      width: 100%;
+      height: 100%;
+
+      object-fit: contain;
+
+      display: block;
+    }
+
+    /* CLOSE BUTTON */
+
+    .close-button {
+      position: absolute;
+
+      top: 8px;
+      right: 8px;
+
+      width: 32px;
+      height: 32px;
+
+      border: none;
+      border-radius: 50%;
+
+      background: rgba(0, 0, 0, 0.75);
+      color: white;
+
+      font-size: 20px;
+
+      cursor: pointer;
+
+      z-index: 20;
+    }
+
+    .hint {
+      margin: 0 auto 30px;
+
+      color: #b99b8b;
+      font-size: 13px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="title">
+    <h1>RUPA BEAUTY PARLOUR</h1>
+    <p>Beauty • Music • Memories</p>
+  </div>
+
+
+  <!-- PARLOUR IMAGE -->
+
+  <div class="room">
+
+    <img
+      class="room-image"
+      src="images/parlour.png"
+      alt="Rupa Beauty Parlour"
+    >
+
+    <!-- RADIO CLICK AREA -->
+
+    <button
+      id="radioButton"
+      class="radio-hotspot"
+      aria-label="Turn on radio">
+    </button>
+
+    <!-- RADIO LIGHTS -->
+
+    <div id="lightOne" class="radio-light one"></div>
+    <div id="lightTwo" class="radio-light two"></div>
+    <div id="lightThree" class="radio-light three"></div>
+
+  </div>
+
+
+  <!-- MUSIC -->
+
+  <div id="musicArea" class="music-area">
+
+    <div class="music-title">
+      📻 Rupa's Radio
+    </div>
+
+    <div class="player-box">
+
+      <iframe
+        id="youtubePlayer"
+        title="Rupa Beauty Parlour Music"
+        allow="autoplay; encrypted-media; fullscreen"
+        allowfullscreen>
+      </iframe>
+
+
+      <!-- PRICE CARD COVERS PLAYER -->
+
+      <div id="priceCover" class="price-cover">
+
+        <img
+          src="images/price-card.png"
+          alt="Rupa Beauty Parlour Price Card"
+        >
+
+        <button
+          id="closeButton"
+          class="close-button"
+          aria-label="Close">
+          ×
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <p class="hint">
+    Tap the radio to start the music ✨
+  </p>
+
+
+  <script>
+
+    const radioButton = document.getElementById("radioButton");
+
+    const musicArea = document.getElementById("musicArea");
+
+    const youtubePlayer = document.getElementById("youtubePlayer");
+
+    const priceCover = document.getElementById("priceCover");
+
+    const closeButton = document.getElementById("closeButton");
+
+    const lightOne = document.getElementById("lightOne");
+    const lightTwo = document.getElementById("lightTwo");
+    const lightThree = document.getElementById("lightThree");
+
+
+    let coverTimer = null;
+
+
+    /* RADIO CLICK */
+
+    radioButton.addEventListener("click", function() {
+
+      /* TURN ON RADIO LIGHTS */
+
+      lightOne.classList.add("on");
+      lightTwo.classList.add("on");
+      lightThree.classList.add("on");
+
+
+      /* SHOW MUSIC AREA */
+
+      musicArea.classList.add("show");
+
+
+      /* START YOUTUBE PLAYLIST */
+
+      youtubePlayer.src =
+        "https://www.youtube.com/embed/videoseries?list=PLDM1Hx4dEkFY&autoplay=1&playsinline=1";
+
+
+      /* WAIT 3 SECONDS */
+
+      clearTimeout(coverTimer);
+
+      coverTimer = setTimeout(function() {
+
+        priceCover.classList.add("show");
+
+      }, 3000);
+
+    });
+
+
+    /* CLOSE */
+
+    closeButton.addEventListener("click", function() {
+
+      clearTimeout(coverTimer);
+
+      priceCover.classList.remove("show");
+
+      youtubePlayer.src = "";
+
+      musicArea.classList.remove("show");
+
+      lightOne.classList.remove("on");
+      lightTwo.classList.remove("on");
+      lightThree.classList.remove("on");
+
+    });
+
+  </script>
+<!-- COLORFUL FAIRY LIGHTS -->
+
+<div class="fairy-light fairy-red" style="left: 10%; top: 10%;"></div>
+<div class="fairy-light fairy-green" style="left: 35.4%; top: 19.4%;"></div>
+<div class="fairy-light fairy-blue" style="left: 31%; top: 19.2%;"></div>
+<div class="fairy-light fairy-orange" style="left: 40%; top: 10%;"></div>
+
+<div class="fairy-light fairy-red" style="left: 50%; top: 10%;"></div>
+<div class="fairy-light fairy-green" style="left: 60%; top: 17%;"></div>
+<div class="fairy-light fairy-blue" style="left: 70%; top: 9%;"></div>
+<div class="fairy-light fairy-orange" style="left: 80%; top: 16%;"></div>
+
+<div class="fairy-light fairy-green" style="left: 12%; top: 30%;"></div>
+<div class="fairy-light fairy-orange" style="left: 25%; top: 35%;"></div>
+<div class="fairy-light fairy-red" style="left: 75%; top: 32%;"></div>
+<div class="fairy-light fairy-blue" style="left: 88%; top: 28%;"></div>
+
+<div class="fairy-light fairy-blue" style="left: 15%; top: 55%;"></div>
+<div class="fairy-light fairy-red" style="left: 28%; top: 60%;"></div>
+<div class="fairy-light fairy-orange" style="left: 72%; top: 58%;"></div>
+<div class="fairy-light fairy-green" style="left: 87%; top: 52%;"></div>
+</body>
+</html>
